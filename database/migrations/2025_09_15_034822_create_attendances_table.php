@@ -12,7 +12,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('meeting_id');
             $table->uuid('user_id');
-            $table->boolean('is_present')->default(false);
+            $table->enum('status', ['hadir', 'tidak'])->default('hadir');
             $table->timestamps();
 
             $table->foreign('meeting_id')->references('id')->on('meetings')->onDelete('cascade');
@@ -25,3 +25,4 @@ return new class extends Migration
         Schema::dropIfExists('attendances');
     }
 };
+

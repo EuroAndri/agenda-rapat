@@ -9,12 +9,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('id')->primary(); 
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password')->nullable();
-            $table->string('position')->nullable(); 
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('google_id')->nullable(); //login via Google
             $table->rememberToken();
             $table->timestamps();
         });
@@ -25,3 +24,6 @@ return new class extends Migration
         Schema::dropIfExists('users');
     }
 };
+
+
+

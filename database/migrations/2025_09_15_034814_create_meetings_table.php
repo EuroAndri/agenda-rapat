@@ -12,9 +12,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->dateTime('start_time');
-            $table->dateTime('end_time');
-            $table->string('location')->nullable();
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
             $table->uuid('created_by'); 
             $table->timestamps();
 
@@ -27,3 +26,4 @@ return new class extends Migration
         Schema::dropIfExists('meetings');
     }
 };
+
