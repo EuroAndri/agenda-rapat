@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('meetings', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('title');
+            
             $table->text('description')->nullable();
             $table->timestamp('start_time');
             $table->timestamp('end_time');
