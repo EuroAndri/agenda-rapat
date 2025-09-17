@@ -15,7 +15,6 @@ return new class extends Migration
             $table->longText('content')->nullable(); 
             $table->timestamps();
 
-            // Foreign keys
             $table->foreign('meeting_id')->references('id')->on('meetings')->onDelete('cascade');
             $table->foreign('recorded_by')->references('id')->on('users')->onDelete('cascade');
         });
