@@ -7,9 +7,7 @@ use App\Models\Pengguna;
 
 class PenggunaSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+    
     public function run(): void
     {
         

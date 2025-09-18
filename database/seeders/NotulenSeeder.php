@@ -22,6 +22,7 @@ class NotulenSeeder extends Seeder
 
         
         foreach ($rapats as $rapat) {
+            
             foreach ($penggunas->random(3) as $pengguna) {  
                 Notulen::create([
                     'id_rapat' => $rapat->id,  
