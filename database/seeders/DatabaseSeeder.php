@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Menjalankan seeder PenggunaSeeder dan RapatSeeder
+        //Memanggil seeder lainnya
         $this->call([
             PenggunaSeeder::class,  
             RapatSeeder::class,     
