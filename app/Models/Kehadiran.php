@@ -15,17 +15,14 @@ class Kehadiran extends Model
     public $incrementing = false; 
     protected $keyType = 'string'; 
 
-    
     protected $fillable = [
         'id_rapat', 'id_pengguna', 'status',
     ];
-
     
     public function rapat()
     {
         return $this->belongsTo(Rapat::class, 'id_rapat', 'id');
     }
-
    
     public function pengguna()
     {

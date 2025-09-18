@@ -15,7 +15,6 @@ class Ruangan extends Model
     public $incrementing = false; 
     protected $keyType = 'string'; 
 
-    
     protected $fillable = [
         'nama_ruangan', 'deskripsi',
     ];

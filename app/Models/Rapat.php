@@ -21,26 +21,22 @@ class Rapat extends Model
     protected $fillable = [
         'Judul', 'Deskripsi', 'Waktu_Mulai', 'Waktu_Selesai', 'Dibuat_Oleh',
     ];
-
-    
+ 
     public function pembuat()
     {
         return $this->belongsTo(Pengguna::class, 'Dibuat_Oleh', 'id');
     }
-
-   
+ 
     public function kehadirans()
     {
         return $this->hasMany(Kehadiran::class, 'id_rapat', 'id');
     }
 
-    
     public function notulens()
     {
         return $this->hasMany(Notulen::class, 'id_rapat', 'id');
     }
 
-    
     public function pengguna()
     {
         return $this->belongsToMany(Pengguna::class, 'Pengguna_Rapat', 'id_rapat', 'id_pengguna');

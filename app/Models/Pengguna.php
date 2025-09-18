@@ -15,23 +15,19 @@ class Pengguna extends Model
     public $incrementing = false; 
     protected $keyType = 'string'; 
 
-    
     protected $fillable = [
         'nama', 'email', 'password', 'google_id',
     ];
 
-    
     public function kehadirans()
     {
         return $this->hasMany(Kehadiran::class, 'id_pengguna', 'id');
     }
 
-    
     public function notulens()
     {
         return $this->hasMany(Notulen::class, 'Dibuat_oleh', 'id');
     }
-
     
     public function rapats()
     {

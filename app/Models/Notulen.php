@@ -20,19 +20,16 @@ class Notulen extends Model
         'id_rapat', 'Dibuat_oleh', 'konten_path',
     ];
 
-    
     public function rapat()
     {
         return $this->belongsTo(Rapat::class, 'id_rapat', 'id');
     }
-
-    
+ 
     public function pengguna()
     {
         return $this->belongsTo(Pengguna::class, 'Dibuat_oleh', 'id');
     }
 
-    
     public static function uploadPDF($file)
     {
         
