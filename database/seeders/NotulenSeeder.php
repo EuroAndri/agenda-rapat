@@ -15,18 +15,17 @@ class NotulenSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create('id_ID');  // Membuat instance Faker dengan locale Indonesia
+        $faker = Faker::create('id_ID');  
 
-        $rapats = Rapat::all();  // Mengambil semua rapat
-        $penggunas = Pengguna::all();  // Mengambil semua pengguna
+        $rapats = Rapat::all();  
+        $penggunas = Pengguna::all();  
 
-        // Loop untuk menghubungkan pengguna ke rapat
+        
         foreach ($rapats as $rapat) {
-            // Ambil 3 pengguna acak untuk setiap rapat dan hubungkan dengan notulen
-            foreach ($penggunas->random(3) as $pengguna) {  // Ambil 3 pengguna acak untuk setiap rapat
+            foreach ($penggunas->random(3) as $pengguna) {  
                 Notulen::create([
-                    'id_rapat' => $rapat->id,  // ID rapat
-                    'Dibuat_oleh' => $pengguna->id,  // ID pengguna
+                    'id_rapat' => $rapat->id,  
+                    'Dibuat_oleh' => $pengguna->id,  
                     'konten_path' => Notulen::uploadPDF($faker->randomElement(['notulen1', 'notulen2', 'notulen3']) . '.pdf'),  // Path file notulen
                 ]);
             }

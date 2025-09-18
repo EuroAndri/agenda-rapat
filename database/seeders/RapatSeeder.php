@@ -12,7 +12,7 @@ class RapatSeeder extends Seeder
      */
     public function run(): void
     {
-        // Menggunakan factory untuk membuat 10 data rapat
+        
         Rapat::factory(10)->create();
     }
 }

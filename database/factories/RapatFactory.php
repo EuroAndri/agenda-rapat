@@ -18,16 +18,16 @@ class RapatFactory extends Factory
      */
     public function definition()
     {
-        // Set Faker locale to Indonesia
-        $faker = \Faker\Factory::create('id_ID');  // Locale Indonesia
+       
+        $faker = \Faker\Factory::create('id_ID');  
 
         return [
-            'id' => (string) Str::uuid(),  // UUID untuk id
-            'Judul' => $faker->sentence,  // Judul rapat acak
-            'Deskripsi' => $faker->paragraph,  // Deskripsi rapat acak
-            'Waktu_Mulai' => $faker->dateTimeThisMonth,  // Waktu mulai rapat
-            'Waktu_Selesai' => $faker->dateTimeThisMonth,  // Waktu selesai rapat
-            'Dibuat_Oleh' => Pengguna::inRandomOrder()->first()->id,  // Pilih ID pengguna acak
+            'id' => (string) Str::uuid(),  
+            'Judul' => $faker->sentence,  
+            'Deskripsi' => $faker->paragraph,  
+            'Waktu_Mulai' => $faker->dateTimeThisMonth,  
+            'Waktu_Selesai' => $faker->dateTimeThisMonth,  
+            'Dibuat_Oleh' => Pengguna::inRandomOrder()->first()->id,  
         ];
     }
 }

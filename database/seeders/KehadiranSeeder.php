@@ -15,19 +15,19 @@ class KehadiranSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Faker::create('id_ID');  // Membuat instance Faker dengan locale Indonesia
+        $faker = Faker::create('id_ID');  
 
-        $rapats = Rapat::all();  // Mengambil semua rapat
-        $penggunas = Pengguna::all();  // Mengambil semua pengguna
+        $rapats = Rapat::all();  
+        $penggunas = Pengguna::all();  
 
-        // Loop untuk menghubungkan pengguna ke rapat
+        
         foreach ($rapats as $rapat) {
-            // Ambil 5 pengguna acak untuk setiap rapat dan tambahkan status kehadiran
-            foreach ($penggunas->random(5) as $pengguna) {  // Ambil 5 pengguna acak untuk setiap rapat
+            
+            foreach ($penggunas->random(5) as $pengguna) {  
                 Kehadiran::create([
-                    'id_rapat' => $rapat->id,  // ID rapat
-                    'id_pengguna' => $pengguna->id,  // ID pengguna
-                    'status' => $faker->randomElement(['hadir', 'tidak']),  // Status kehadiran acak
+                    'id_rapat' => $rapat->id,  
+                    'id_pengguna' => $pengguna->id, 
+                    'status' => $faker->randomElement(['hadir', 'tidak']),  
                 ]);
             }
         }

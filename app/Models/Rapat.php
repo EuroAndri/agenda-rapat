@@ -15,8 +15,8 @@ class Rapat extends Model
 
     protected $table = 'Rapat';
     protected $primaryKey = 'id'; 
-    public $incrementing = false;  // Tidak menggunakan auto-increment
-    protected $keyType = 'string'; // Menggunakan string (UUID) sebagai key type
+    public $incrementing = false;  
+    protected $keyType = 'string'; 
 
     protected $fillable = [
         'Judul', 'Deskripsi', 'Waktu_Mulai', 'Waktu_Selesai', 'Dibuat_Oleh',
@@ -26,7 +26,7 @@ class Rapat extends Model
     {
         static::creating(function ($rapat) {
             if (!$rapat->id) {
-                $rapat->id = (string) Str::uuid();  // Generate UUID jika belum ada ID
+                $rapat->id = (string) Str::uuid(); 
             }
         });
     }
