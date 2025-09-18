@@ -4,20 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Notulen extends Model
 {
     use HasFactory;
 
-    protected $table = 'Notulen'; 
-    protected $primaryKey = 'id'; 
+    protected $table = 'Notulen';
+    protected $primaryKey = 'id';
 
-    public $incrementing = false; 
-    protected $keyType = 'string'; 
+    public $incrementing = false;
+    protected $keyType = 'string';
 
-    
     protected $fillable = [
-        'id_rapat', 'Dibuat_oleh', 'Konten',
+        'id_rapat', 'Dibuat_oleh', 'konten_path',
     ];
 
     
@@ -30,5 +30,12 @@ class Notulen extends Model
     public function pengguna()
     {
         return $this->belongsTo(Pengguna::class, 'Dibuat_oleh', 'id');
+    }
+
+    
+    public static function uploadPDF($file)
+    {
+        
+        return $file->store('notulen', 'public');
     }
 }

@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('Rapat', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('Judul');
-            $table->text('Deskripsi')->nullable();
+            $table->text('Deskripsi');
             $table->timestamp('Waktu_Mulai');
             $table->timestamp('Waktu_Selesai');
             $table->uuid('Dibuat_Oleh'); 

@@ -12,8 +12,8 @@ return new class extends Migration
             $table->uuid('id')->primary(); 
             $table->string('nama');
             $table->string('email')->unique();
-            $table->string('password')->nullable();
-            $table->string('google_id')->nullable(); 
+            $table->string('password');
+            $table->string('google_id'); 
             $table->rememberToken();
             $table->timestamps();
         });

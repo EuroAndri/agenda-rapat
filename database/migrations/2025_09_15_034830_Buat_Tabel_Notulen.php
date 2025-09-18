@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('Notulen', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('id_rapat');      
-            $table->uuid('Dibuat_oleh');     
-            $table->longText('Konten')->nullable(); 
+            $table->uuid('id_rapat');
+            $table->uuid('Dibuat_oleh');
+            $table->string('konten_path'); 
             $table->timestamps();
 
             $table->foreign('id_rapat')->references('id')->on('Rapat')->onDelete('restrict');

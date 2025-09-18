@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('Ruangan', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nama_ruangan');
-            $table->text('deskripsi')->nullable();
+            $table->text('deskripsi');
             $table->timestamps();
         });
     }
