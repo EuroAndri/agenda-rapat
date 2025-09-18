@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Pengguna;  // Pastikan sudah mengimpor model Pengguna
+use App\Models\Rapat;     // Pastikan sudah mengimpor model Rapat
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Menjalankan seeder PenggunaSeeder dan RapatSeeder
+        $this->call([
+            PenggunaSeeder::class,  // Memanggil seeder PenggunaSeeder
+            RapatSeeder::class,     // Memanggil seeder RapatSeeder
+            RuanganSeeder::class,   // Memanggil seeder RuanganSeeder
+            NotulenSeeder::class,   // Memanggil seeder NotulenSeeder
+            KehadiranSeeder::class, // Memanggil seeder KehadiranSeeder
+            PenggunaRapatSeeder::class, // Memanggil seeder PenggunaRapatSeeder
         ]);
+        
+        // Jika kamu ingin menambahkan data pengguna tambahan secara manual:
+             // Menggunakan factory untuk membuat data rapat secara otomatis
     }
 }
