@@ -13,13 +13,13 @@ class PenggunaRapatSeeder extends Seeder
      */
     public function run(): void
     {
-        $rapats = Rapat::all();  // Mengambil semua rapat
-        $penggunas = Pengguna::all();  // Mengambil semua pengguna
+        $rapats = Rapat::all();  
+        $penggunas = Pengguna::all();  
 
-        // Loop untuk menghubungkan pengguna ke rapat
+        
         foreach ($rapats as $rapat) {
-            foreach ($penggunas->random(5) as $pengguna) {  // Ambil 5 pengguna acak untuk setiap rapat
-                $rapat->pengguna()->attach($pengguna->id);  // Menambahkan pengguna ke rapat
+            foreach ($penggunas->random(5) as $pengguna) {  
+                $rapat->pengguna()->attach($pengguna->id);  
             }
         }
     }

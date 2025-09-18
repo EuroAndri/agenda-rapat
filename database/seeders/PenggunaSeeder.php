@@ -12,7 +12,7 @@ class PenggunaSeeder extends Seeder
      */
     public function run(): void
     {
-        // Menggunakan factory untuk membuat 10 pengguna
+        
         Pengguna::factory(10)->create();
     }
 }

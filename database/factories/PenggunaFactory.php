@@ -16,14 +16,14 @@ class PenggunaFactory extends Factory
      */
     public function definition()
     {
-        $faker = \Faker\Factory::create('id_ID');  // Locale Indonesia
+        $faker = \Faker\Factory::create('id_ID'); 
 
         return [
-            'id' => (string) \Illuminate\Support\Str::uuid(),  // UUID untuk id
-            'nama' => $faker->name,  // Nama acak (dengan format Indonesia)
-            'email' => $faker->unique()->userName . '@gmail.com',  // Email dengan domain @gmail.com
-            'password' => bcrypt('password'),  // Password yang di-hash
-            'google_id' => $faker->uuid,  // UUID untuk google_id
+            'id' => (string) \Illuminate\Support\Str::uuid(),  
+            'nama' => $faker->name,  
+            'email' => $faker->unique()->userName . '@gmail.com',  
+            'password' => bcrypt('password'), 
+            'google_id' => $faker->uuid,  
         ];
     }
 }

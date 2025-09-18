@@ -18,14 +18,14 @@ class NotulenFactory extends Factory
      */
     public function definition()
     {
-        // Pilih pengguna dan rapat acak
+        
         $pengguna = Pengguna::inRandomOrder()->first();
         $rapat = Rapat::inRandomOrder()->first();
 
         return [
-            'id_rapat' => $rapat->id,  // ID rapat
-            'Dibuat_oleh' => $pengguna->id,  // ID pengguna
-            'konten_path' => $this->faker->word . '.pdf',  // Path file notulen
+            'id_rapat' => $rapat->id,  
+            'Dibuat_oleh' => $pengguna->id,  
+            'konten_path' => $this->faker->word . '.pdf',  
         ];
     }
 }

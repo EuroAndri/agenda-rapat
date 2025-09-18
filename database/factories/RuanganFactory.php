@@ -16,7 +16,7 @@ class RuanganFactory extends Factory
      */
     public function definition()
     {
-        $faker = \Faker\Factory::create('id_ID');  // Menggunakan locale Indonesia
+        $faker = \Faker\Factory::create('id_ID');  
 
         return [
             'id' => $faker->uuid,
