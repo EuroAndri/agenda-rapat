@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Ruangan;
+use App\Models\Tempat;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RuanganFactory extends Factory
+class TempatFactory extends Factory
 {
-    protected $model = Ruangan::class;
+    protected $model = Tempat::class;
 
     /**
      * Define the model's default state.
@@ -16,11 +16,11 @@ class RuanganFactory extends Factory
      */
     public function definition()
     {
-        $faker = \Faker\Factory::create('id_ID');
+        $faker = \Faker\Factory::create('id_ID');  
 
         return [
             'id' => $faker->uuid,
-            'nama_ruangan' => $faker->company.' '.$faker->word,
+            'nama' => $faker->company,
             'deskripsi' => $faker->paragraph,
         ];
     }

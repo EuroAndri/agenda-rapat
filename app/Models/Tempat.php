@@ -7,17 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ruangan extends Model
 {
-    use HasFactory;
+    use HasUuids, HasFactory;
 
-    protected $table = 'Ruangan';
+    protected $table = 'tempat';  
 
-    protected $primaryKey = 'id';
-
-    public $incrementing = false;
-
-    protected $keyType = 'string';
-
-    protected $fillable = [
-        'nama_ruangan', 'deskripsi',
-    ];
+    protected $guarded = [];
 }

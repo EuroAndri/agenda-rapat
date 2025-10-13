@@ -9,30 +9,30 @@ class Pengguna extends Model
 {
     use HasFactory;
 
-    protected $table = 'Pengguna';
+    protected $table = 'pengguna'; 
+    protected $primaryKey = 'id'; 
 
-    protected $primaryKey = 'id';
-
-    public $incrementing = false;
-
-    protected $keyType = 'string';
+    public $incrementing = false; 
+    protected $keyType = 'string'; 
 
     protected $fillable = [
-        'nama', 'email', 'password', 'google_id',
+        'nama', 'email', 'password', 'google_id', 'google_avatar',
     ];
 
     public function kehadirans()
     {
-        return $this->hasMany(Kehadiran::class, 'id_pengguna', 'id');
+        return $this->hasMany(Kehadiran::class, 'pengguna_id');
     }
 
     public function notulens()
     {
-        return $this->hasMany(Notulen::class, 'Dibuat_oleh', 'id');
+        return $this->hasMany(Notulen::class, 'pengguna_id');
     }
-
+    
     public function rapats()
     {
-        return $this->belongsToMany(Rapat::class, 'Pengguna_Rapat', 'id_pengguna', 'id_rapat');
+        return $this->hasMany(Rapat::class, 'pengguna_id');
     }
 }
+
+//nama kolom dan tabel kecil

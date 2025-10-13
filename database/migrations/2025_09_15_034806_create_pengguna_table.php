@@ -8,19 +8,24 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('Pengguna', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+        Schema::create('pengguna', function (Blueprint $table) {
+            $table->uuid('id')->primary(); 
             $table->string('nama');
             $table->string('email')->unique();
-            $table->string('password');
-            $table->string('google_id');
-            $table->rememberToken();
+            $table->string('password')->nullable();
+            $table->string('google_id')->nullable();
+            $table->string('google_avatar')->nullable(); 
+            $table->rememberToken()->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('Pengguna');
+        Schema::dropIfExists('pengguna');
     }
 };
+
+
+

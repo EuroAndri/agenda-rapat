@@ -8,20 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('Notulen', function (Blueprint $table) {
+        Schema::create('notulen', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('id_rapat');
-            $table->uuid('Dibuat_oleh');
-            $table->string('konten_path');
+            $table->text('isi')->nullable();      
+            $table->string('berkas')->nullable();
+            $table->foreign('rapat_id')->references('id')->on('rapat')->onDelete('cascade');
+            $table->foreign('pengguna_id')->references('id')->on('pengguna')->onDelete('cascade');
             $table->timestamps();
-
-            $table->foreign('id_rapat')->references('id')->on('Rapat')->onDelete('restrict');
-            $table->foreign('Dibuat_oleh')->references('id')->on('Pengguna')->onDelete('restrict');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('Notulen');
+        Schema::dropIfExists('notulen');
     }
 };

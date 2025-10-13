@@ -8,20 +8,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('Kehadiran', function (Blueprint $table) {
+        Schema::create('kehadiran', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('id_rapat');
-            $table->uuid('id_pengguna');
-            $table->enum('status', ['hadir', 'tidak'])->default('hadir');
+            $table->enum('status', ['hadir', 'tidak', 'mungkin'])->default('mungkin');
+            $table->foreign('rapat_id')->references('id')->on('rapat')->onDelete('cascade');
+            $table->foreign('pengguna_id')->references('id')->on('pengguna')->onDelete('cascade');
             $table->timestamps();
-
-            $table->foreign('id_rapat')->references('id')->on('Rapat')->onDelete('restrict');
-            $table->foreign('id_pengguna')->references('id')->on('Pengguna')->onDelete('restrict');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('Kehadiran');
+        Schema::dropIfExists('kehadiran');
     }
 };
