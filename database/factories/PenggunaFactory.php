@@ -19,11 +19,13 @@ class PenggunaFactory extends Factory
         $faker = \Faker\Factory::create('id_ID');
 
         return [
-            'id' => (string) \Illuminate\Support\Str::uuid(),
-            'nama' => $faker->name,
-            'email' => $faker->unique()->userName.'@gmail.com',
-            'password' => bcrypt('password'),
-            'google_id' => $faker->uuid,
-        ];
+        'id' => (string) \Illuminate\Support\Str::uuid(),
+        'nama' => $faker->name,
+        'email' => $faker->unique()->userName.'@gmail.com',
+        'password' => bcrypt('password'),
+        'google_id' => $faker->uuid,
+        'google_avatar' => $faker->imageUrl(200, 200, 'people', true, 'avatar'),
+];
+
     }
 }

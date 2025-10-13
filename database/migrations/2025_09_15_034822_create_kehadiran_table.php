@@ -10,10 +10,17 @@ return new class extends Migration
     {
         Schema::create('kehadiran', function (Blueprint $table) {
             $table->uuid('id')->primary();
+
+            // ✅ Tambahkan kolom foreign key dulu
+            $table->uuid('rapat_id');
+            $table->uuid('pengguna_id');
+
             $table->enum('status', ['hadir', 'tidak', 'mungkin'])->default('mungkin');
+            $table->timestamps();
+
+            // ✅ Baru tambahkan relasi foreign key
             $table->foreign('rapat_id')->references('id')->on('rapat')->onDelete('cascade');
             $table->foreign('pengguna_id')->references('id')->on('pengguna')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 
