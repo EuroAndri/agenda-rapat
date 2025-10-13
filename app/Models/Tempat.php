@@ -6,11 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
-class Ruangan extends Model
+class Tempat extends Model
 {
-    use HasUuids, HasFactory;
+    use HasFactory, HasUuids;
 
-    protected $table = 'tempat';  
-
+    protected $table = 'tempat';
     protected $guarded = [];
+    protected $keyType = 'string';
+    public $incrementing = false;
+
+    // ✅ Relasi: Tempat punya banyak Rapat
+    public function rapats()
+    {
+        return $this->hasMany(Rapat::class, 'tempat_id');
+    }
 }

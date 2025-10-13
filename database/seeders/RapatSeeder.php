@@ -4,15 +4,21 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Rapat;
+use App\Models\Tempat;
+use App\Models\Pengguna;
 
 class RapatSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run():void
+    public function run(): void
     {
-        Rapat::factory(10)->create();
+        $tempatList = Tempat::all();
+        $penggunaList = Pengguna::all();
+
+        Rapat::factory(20)->make()->each(function ($rapat) use ($tempatList, $penggunaList) {
+            $rapat->tempat_id = $tempatList->random()->id;
+            $rapat->pengguna_id = $penggunaList->random()->id;
+            $rapat->save();
+        });
     }
 }
-//todo: ubah seperti kehadiran / notulen
+//todo: ubah seperti kehadiran / notulen (sudah)
