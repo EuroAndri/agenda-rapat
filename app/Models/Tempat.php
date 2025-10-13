@@ -12,10 +12,7 @@ class Tempat extends Model
 
     protected $table = 'tempat';
     protected $guarded = [];
-    protected $keyType = 'string';
-    public $incrementing = false;
 
-    // ✅ Relasi: Tempat punya banyak Rapat
     public function rapats()
     {
         return $this->hasMany(Rapat::class, 'tempat_id');
