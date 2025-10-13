@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Rapat;
+use Illuminate\Database\Seeder;
 
 class RapatSeeder extends Seeder
 {
@@ -12,7 +12,7 @@ class RapatSeeder extends Seeder
      */
     public function run(): void
     {
-        
+
         Rapat::factory(10)->create();
     }
 }

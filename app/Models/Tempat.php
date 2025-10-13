@@ -9,11 +9,13 @@ class Ruangan extends Model
 {
     use HasFactory;
 
-    protected $table = 'Ruangan'; 
-    protected $primaryKey = 'id'; 
+    protected $table = 'Ruangan';
 
-    public $incrementing = false; 
-    protected $keyType = 'string'; 
+    protected $primaryKey = 'id';
+
+    public $incrementing = false;
+
+    protected $keyType = 'string';
 
     protected $fillable = [
         'nama_ruangan', 'deskripsi',

@@ -9,11 +9,13 @@ class Pengguna extends Model
 {
     use HasFactory;
 
-    protected $table = 'Pengguna'; 
-    protected $primaryKey = 'id'; 
+    protected $table = 'Pengguna';
 
-    public $incrementing = false; 
-    protected $keyType = 'string'; 
+    protected $primaryKey = 'id';
+
+    public $incrementing = false;
+
+    protected $keyType = 'string';
 
     protected $fillable = [
         'nama', 'email', 'password', 'google_id',
@@ -28,7 +30,7 @@ class Pengguna extends Model
     {
         return $this->hasMany(Notulen::class, 'Dibuat_oleh', 'id');
     }
-    
+
     public function rapats()
     {
         return $this->belongsToMany(Rapat::class, 'Pengguna_Rapat', 'id_pengguna', 'id_rapat');

@@ -16,14 +16,14 @@ class PenggunaFactory extends Factory
      */
     public function definition()
     {
-        $faker = \Faker\Factory::create('id_ID'); 
+        $faker = \Faker\Factory::create('id_ID');
 
         return [
-            'id' => (string) \Illuminate\Support\Str::uuid(),  
-            'nama' => $faker->name,  
-            'email' => $faker->unique()->userName . '@gmail.com',  
-            'password' => bcrypt('password'), 
-            'google_id' => $faker->uuid,  
+            'id' => (string) \Illuminate\Support\Str::uuid(),
+            'nama' => $faker->name,
+            'email' => $faker->unique()->userName.'@gmail.com',
+            'password' => bcrypt('password'),
+            'google_id' => $faker->uuid,
         ];
     }
 }

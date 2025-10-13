@@ -18,15 +18,15 @@ class KehadiranFactory extends Factory
      */
     public function definition()
     {
-        
+
         $pengguna = Pengguna::inRandomOrder()->first();
         $rapat = Rapat::inRandomOrder()->first();
 
         return [
-            'id' => $this->faker->uuid,  
-            'id_rapat' => $rapat->id,  
-            'id_pengguna' => $pengguna->id,  
-            'status' => $this->faker->randomElement(['hadir', 'tidak']),  
+            'id' => $this->faker->uuid,
+            'id_rapat' => $rapat->id,
+            'id_pengguna' => $pengguna->id,
+            'status' => $this->faker->randomElement(['hadir', 'tidak']),
         ];
     }
 }

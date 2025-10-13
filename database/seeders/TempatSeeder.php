@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;  
-use App\Models\Ruangan;  
+use App\Models\Ruangan;
+use Illuminate\Database\Seeder;
 
 class RuanganSeeder extends Seeder
 {
@@ -12,6 +12,6 @@ class RuanganSeeder extends Seeder
      */
     public function run(): void
     {
-        Ruangan::factory(10)->create();  
+        Ruangan::factory(10)->create();
     }
 }

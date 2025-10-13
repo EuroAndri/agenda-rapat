@@ -16,11 +16,11 @@ class RuanganFactory extends Factory
      */
     public function definition()
     {
-        $faker = \Faker\Factory::create('id_ID');  
+        $faker = \Faker\Factory::create('id_ID');
 
         return [
             'id' => $faker->uuid,
-            'nama_ruangan' => $faker->company . ' ' . $faker->word,
+            'nama_ruangan' => $faker->company.' '.$faker->word,
             'deskripsi' => $faker->paragraph,
         ];
     }

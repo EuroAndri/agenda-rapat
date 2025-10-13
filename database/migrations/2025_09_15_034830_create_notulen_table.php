@@ -8,19 +8,20 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('Pengguna_Rapat', function (Blueprint $table) {
-            $table->uuid('id_pengguna');
+        Schema::create('Notulen', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->uuid('id_rapat');
+            $table->uuid('Dibuat_oleh');
+            $table->string('konten_path');
             $table->timestamps();
 
-            $table->primary(['id_pengguna', 'id_rapat']);
-            $table->foreign('id_pengguna')->references('id')->on('Pengguna')->onDelete('restrict');
             $table->foreign('id_rapat')->references('id')->on('Rapat')->onDelete('restrict');
+            $table->foreign('Dibuat_oleh')->references('id')->on('Pengguna')->onDelete('restrict');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('Pengguna_Rapat');
+        Schema::dropIfExists('Notulen');
     }
 };

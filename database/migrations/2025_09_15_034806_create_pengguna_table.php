@@ -9,11 +9,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('Pengguna', function (Blueprint $table) {
-            $table->uuid('id')->primary(); 
+            $table->uuid('id')->primary();
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('google_id'); 
+            $table->string('google_id');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -24,6 +24,3 @@ return new class extends Migration
         Schema::dropIfExists('Pengguna');
     }
 };
-
-
-

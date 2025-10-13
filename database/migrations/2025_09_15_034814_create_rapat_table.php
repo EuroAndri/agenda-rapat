@@ -13,11 +13,10 @@ return new class extends Migration
             $table->string('Judul');
             $table->text('Deskripsi');
             $table->timestamp('Waktu_Mulai');
-            $table->timestamp('Waktu_Selesai')->nullable();;
-            $table->uuid('Dibuat_Oleh'); 
+            $table->timestamp('Waktu_Selesai')->nullable();
+            $table->uuid('Dibuat_Oleh');
             $table->timestamps();
 
-           
             $table->foreign('Dibuat_Oleh')->references('id')->on('Pengguna')->onDelete('restrict');
         });
     }
