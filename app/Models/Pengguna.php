@@ -34,5 +34,3 @@ class Pengguna extends Model
         return $this->hasMany(Rapat::class, 'pengguna_id');
     }
 }
-
-//nama kolom dan tabel kecil
