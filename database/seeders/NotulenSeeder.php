@@ -22,7 +22,7 @@ class NotulenSeeder extends Seeder
                 Notulen::create([
                     'rapat_id' => $rapat->id,
                     'pengguna_id' => $pengguna->id,
-                    'isi' => $faker->sentence(10), // opsional: isi notulen
+                    'isi' => $faker->sentence(10), 
                     'berkas' => $faker->randomElement([
                         'notulen1.pdf',
                         'notulen2.pdf',

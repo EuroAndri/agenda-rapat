@@ -13,15 +13,10 @@ return new class extends Migration
         $table->string('judul');
         $table->string('penyelenggara')->nullable();
         $table->text('deskripsi')->nullable();
-
-        // ✅ Tambahkan kolom foreign key dulu
         $table->uuid('tempat_id');
         $table->uuid('pengguna_id');
-
-        // ✅ Baru tambahkan relasi
         $table->foreign('tempat_id')->references('id')->on('tempat')->onDelete('restrict');
         $table->foreign('pengguna_id')->references('id')->on('pengguna')->onDelete('restrict');
-
         $table->timestamp('waktu_mulai')->nullable();
         $table->timestamp('waktu_selesai')->nullable();
         $table->timestamps();

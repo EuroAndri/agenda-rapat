@@ -16,7 +16,7 @@ class TempatFactory extends Factory
         return [
             'id' => $faker->uuid,
             'nama' => $faker->company,
-            'deskripsi' => $faker->text(200), // ✅ batasi maksimal 200 karakter
+            'deskripsi' => $faker->text(200), 
         ];
     }
 }

@@ -26,7 +26,7 @@ class KehadiranFactory extends Factory
             'id' => $this->faker->uuid,
             'id_rapat' => $rapat->id,
             'id_pengguna' => $pengguna->id,
-            'status' => $this->faker->randomElement(['hadir', 'tidak']),
+            'status' => $this->faker->randomElement(['hadir', 'tidak', 'mungkin']),
         ];
     }
 }
