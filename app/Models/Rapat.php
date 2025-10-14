@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids; // ✅ trait Laravel resmi
+use Illuminate\Database\Eloquent\Concerns\HasUuids; 
 
 use App\Models\Pengguna;
 use App\Models\Kehadiran;
@@ -17,8 +17,10 @@ class Rapat extends Model
 
     protected $table = 'rapat';
     protected $guarded = [];
-    
+    protected $keyType = 'string';
+    public $incrementing = false;
 
+    
     public function pembuat()
     {
         return $this->belongsTo(Pengguna::class, 'pengguna_id');
@@ -30,11 +32,13 @@ class Rapat extends Model
         return $this->belongsTo(Tempat::class, 'tempat_id');
     }
 
+    
     public function kehadirans()
     {
         return $this->hasMany(Kehadiran::class, 'rapat_id');
     }
 
+   
     public function notulen()
     {
         return $this->hasOne(Notulen::class, 'rapat_id');

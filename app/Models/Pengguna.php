@@ -11,7 +11,10 @@ class Pengguna extends Model
 
     protected $table = 'pengguna'; 
     protected $primaryKey = 'id'; 
-    
+
+    public $incrementing = false; 
+    protected $keyType = 'string'; 
+
     protected $fillable = [
         'nama', 'email', 'password', 'google_id', 'google_avatar',
     ];
@@ -31,4 +34,3 @@ class Pengguna extends Model
         return $this->hasMany(Rapat::class, 'pengguna_id');
     }
 }
-
