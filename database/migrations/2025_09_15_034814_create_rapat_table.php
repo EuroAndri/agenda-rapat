@@ -18,7 +18,7 @@ return new class extends Migration
         $table->uuid('tempat_id');
         $table->uuid('pengguna_id');
 
-        // ✅ Baru tambahkan relasi
+        
         $table->foreign('tempat_id')->references('id')->on('tempat')->onDelete('restrict');
         $table->foreign('pengguna_id')->references('id')->on('pengguna')->onDelete('restrict');
 

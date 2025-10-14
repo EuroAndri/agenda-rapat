@@ -15,9 +15,6 @@ class Notulen extends Model
 
     protected $table = 'notulen';
     protected $guarded = [];
-    protected $keyType = 'string';
-    public $incrementing = false;
-
     public function rapat()
     {
         return $this->belongsTo(Rapat::class, 'rapat_id');

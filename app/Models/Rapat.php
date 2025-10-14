@@ -17,9 +17,6 @@ class Rapat extends Model
 
     protected $table = 'rapat';
     protected $guarded = [];
-    protected $keyType = 'string';
-    public $incrementing = false;
-
     
     public function pembuat()
     {

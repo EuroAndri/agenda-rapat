@@ -15,9 +15,6 @@ class Kehadiran extends Model
 
     protected $table = 'kehadiran';
     protected $guarded = [];
-    protected $keyType = 'string';
-    public $incrementing = false;
-
     public function rapat()
     {
         return $this->belongsTo(Rapat::class, 'rapat_id');
