@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids; 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use App\Models\KonfirmasiKehadiran; 
+
 
 use App\Models\Rapat;
 use App\Models\Pengguna;
@@ -27,6 +29,6 @@ class Kehadiran extends Model
 
     public function konfirmasi()
     {
-        return $this->hasOne(KonfirmasiKehadiran::class, 'kehadiran_id');
+        return $this->hasOne(KehadiranKonfirmasi::class, 'kehadiran_id');
     }
 }
