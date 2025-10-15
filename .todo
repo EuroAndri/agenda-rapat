@@ -1,2 +1,7 @@
-nama tabel dan kolom huruf kecil
-create_pengguna_tabel
+update
+
+menambah tabel bahan dan relasi rapat has bahan
+menambah konfirmasi kehadiran
+menambah spatie role permission
+melengkapi composer termasuk akses camera
+

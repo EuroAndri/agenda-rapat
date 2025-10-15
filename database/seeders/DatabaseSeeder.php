@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             RapatSeeder::class,    // Memanggil seeder RapatSeeder 
             KehadiranSeeder::class, // Memanggil seeder KehadiranSeeder
             NotulenSeeder::class,   // Memanggil seeder NotulenSeeder
+            KehadiranKonfirmasiSeeder::class, // Memanggil seeder KehadiranKonfirmasiSeeder
+            BahanSeeder::class, // Memanggil seeder BahanSeeder
         ]);
         
         

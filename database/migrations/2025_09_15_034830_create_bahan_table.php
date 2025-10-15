@@ -8,13 +8,15 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('kehadiran', function (Blueprint $table) {
+        Schema::create('bahan', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('rapat_id');
-            $table->uuid('pengguna_id');
-            $table->enum('status', ['hadir', 'tidak', 'mungkin'])->default('mungkin');
+            $table->uuid('rapat_id');     
+            $table->uuid('pengguna_id');  
+            $table->text('isi')->nullable();      
+            $table->string('berkas')->nullable();
             $table->timestamps();
 
+           
             $table->foreign('rapat_id')->references('id')->on('rapat')->onDelete('cascade');
             $table->foreign('pengguna_id')->references('id')->on('pengguna')->onDelete('cascade');
         });
@@ -22,6 +24,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('kehadiran');
+        Schema::dropIfExists('bahan');
     }
 };
+//todo: membuat model bahan

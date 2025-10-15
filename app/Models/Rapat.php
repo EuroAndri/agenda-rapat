@@ -17,9 +17,6 @@ class Rapat extends Model
 
     protected $table = 'rapat';
     protected $guarded = [];
-    protected $keyType = 'string';
-    public $incrementing = false;
-
     
     public function pembuat()
     {
@@ -43,4 +40,9 @@ class Rapat extends Model
     {
         return $this->hasOne(Notulen::class, 'rapat_id');
     }
+
+    public function bahans()
+    {
+        return $this->hasMany(Bahan::class, 'rapat_id');
+    }    
 }

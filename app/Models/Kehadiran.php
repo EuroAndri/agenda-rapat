@@ -15,9 +15,6 @@ class Kehadiran extends Model
 
     protected $table = 'kehadiran';
     protected $guarded = [];
-    protected $keyType = 'string';
-    public $incrementing = false;
-
     public function rapat()
     {
         return $this->belongsTo(Rapat::class, 'rapat_id');
@@ -26,5 +23,10 @@ class Kehadiran extends Model
     public function pengguna()
     {
         return $this->belongsTo(Pengguna::class, 'pengguna_id');
+    }
+
+    public function konfirmasi()
+    {
+        return $this->hasOne(KonfirmasiKehadiran::class, 'kehadiran_id');
     }
 }
