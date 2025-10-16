@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Pengguna;  
-use App\Models\Rapat;     
+use App\Models\Rapat;
+use Spatie\Permission\Contracts\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,15 +14,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Menjalankan seeder PenggunaSeeder dan RapatSeeder
         $this->call([
-            PenggunaSeeder::class, // Memanggil seeder PenggunaSeeder  
-            TempatSeeder::class,   // Memanggil seeder RuanganSeeder
-            RapatSeeder::class,    // Memanggil seeder RapatSeeder 
-            KehadiranSeeder::class, // Memanggil seeder KehadiranSeeder
-            NotulenSeeder::class,   // Memanggil seeder NotulenSeeder
-            KehadiranKonfirmasiSeeder::class, // Memanggil seeder KehadiranKonfirmasiSeeder
-            BahanSeeder::class, // Memanggil seeder BahanSeeder
+            PenggunaSeeder::class, 
+            TempatSeeder::class,   
+            RapatSeeder::class,    
+            KehadiranSeeder::class, 
+            NotulenSeeder::class,   
+            KehadiranKonfirmasiSeeder::class, 
+            BahanSeeder::class, 
+            RoleSeeder::class, 
         ]);
         
         
