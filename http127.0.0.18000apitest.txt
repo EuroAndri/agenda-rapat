@@ -1,0 +1,20 @@
+http://127.0.0.1:8000/api/test
+
+tree /f > daftar_isi.txt
+
+bearer token : 7|fOLWafPvVGZ1HBVDmHFkjyZv1rugXA6ZQPglqAFP0481e7cb
+
+sql: 
+\c laundry_db
+psql -U postgres
+SELECT * FROM pelanggans;
+\dt
+
+pg_dump -U postgres -d laundry_db -f laundry_db.sql
+============================================================================================================================================================
+
+filamen_app : email addres : admin@example.com
+	      pw : 1	
+
+
+

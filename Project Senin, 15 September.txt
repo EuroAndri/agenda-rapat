@@ -1,0 +1,35 @@
+Project Senin, 15 September: 
+
+Laravel Filamen v4
+migrations/seeder
+GitHub
+project untuk agenda rapat
+1. admin : mengelola semuanya & +pegawai
+frontend untuk kalender
+2. operator : menambahkan jadwal
+3. Pegawai Biasa
+input notulen: siapa saja yang hadir rapat
+warning kalau tabrakan rapat
+
+tambahan : permissions 
+role pakai spatie permission 
+bezhansalleh
+socialite
+google auth
+google callender
+semua table gunakan UUID 
+database pakai MySQL. Navicat & Laragon versi 6
+pengguna & pegawai jadi 1
+
+=================================================================
+
+revisi Rabu 17 September: 
+
+google menggunakan avatar
+role menggunakan spatie publish
+permission menggunakan spatie
+model has menggunakan spatie
+belum ada table ruangan
+foreignUuid
+cascade diganti restrict
+table perantara relasi antara table user dan table meeting

@@ -1,0 +1,8 @@
+composer create-project laravel/laravel filament-app
+cd filament-app
+composer require filament/filament:"^4.0"
+php artisan filament:install
+
+psql -U postgres
+
+cd C:\xampp\htdocs\agenda-rapat

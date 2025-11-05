@@ -1,0 +1,165 @@
+📌 Step-by-Step Laravel Filament v4 (Login + CRUD) dengan PostgreSQL
+1. Buat Proyek Laravel
+
+Buka Cmder lalu jalankan:
+
+composer create-project laravel/laravel filament-app
+cd filament-app
+
+2. Konfigurasi .env (PostgreSQL)
+
+Buka file .env di VS Code, ubah bagian database:
+
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=filament_app
+DB_USERNAME=postgres
+DB_PASSWORD=yourpassword
+
+
+Pastikan sudah buat database filament_app di PostgreSQL:
+
+CREATE DATABASE filament_app;
+
+3. Generate Key & Migrasi Awal
+php artisan key:generate
+php artisan migrate
+
+4. Install Laravel Breeze (Login/Register dasar)
+
+Untuk login user (selain panel admin), jalankan:
+
+composer require laravel/breeze --dev
+php artisan breeze:install
+npm install && npm run build
+php artisan migrate
+
+
+Sekarang Anda punya sistem login/registrasi di /login & /register.
+
+5. Install Filament v4
+composer require filament/filament:"^4.0"
+php artisan filament:install --panels
+
+
+Ini akan membuat:
+
+Panel admin default di /admin
+
+File konfigurasi panel: app/Providers/Filament/AdminPanelProvider.php
+
+6. Atur Akses User ke Panel
+
+Edit app/Models/User.php:
+
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable implements FilamentUser
+{
+    public function canAccessPanel(Panel $panel): bool
+    {
+        // Hanya user dengan email tertentu yang bisa akses admin
+        return str_ends_with($this->email, '@admin.com');
+    }
+}
+
+
+👉 Jadi, kalau login dengan user@admin.com, bisa masuk panel admin.
+
+7. Buat Model & Migration (Contoh: Product)
+php artisan make:model Product -m
+
+
+Edit migration database/migrations/...create_products_table.php:
+
+Schema::create('products', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+    $table->text('description')->nullable();
+    $table->integer('stock')->default(0);
+    $table->decimal('price', 12, 2);
+    $table->timestamps();
+});
+
+
+Lalu jalankan:
+
+php artisan migrate
+
+8. Buat CRUD Resource di Filament
+php artisan make:filament-resource Product --generate
+
+
+Ini akan otomatis buat:
+
+app/Filament/Resources/ProductResource.php
+app/Filament/Resources/ProductResource/Pages/ListProducts.php
+app/Filament/Resources/ProductResource/Pages/CreateProduct.php
+app/Filament/Resources/ProductResource/Pages/EditProduct.php
+
+9. Sesuaikan Form & Table (ProductResource.php)
+use Filament\Forms;
+use Filament\Tables;
+
+public static function form(Forms\Form $form): Forms\Form
+{
+    return $form->schema([
+        Forms\Components\TextInput::make('name')->required()->maxLength(255),
+        Forms\Components\Textarea::make('description'),
+        Forms\Components\TextInput::make('stock')->numeric()->minValue(0)->required(),
+        Forms\Components\TextInput::make('price')->numeric()->required(),
+    ]);
+}
+
+public static function table(Tables\Table $table): Tables\Table
+{
+    return $table
+        ->columns([
+            Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
+            Tables\Columns\TextColumn::make('stock')->sortable(),
+            Tables\Columns\TextColumn::make('price')->money('idr')->sortable(),
+            Tables\Columns\TextColumn::make('created_at')->dateTime()->since(),
+        ])
+        ->actions([
+            Tables\Actions\EditAction::make(),
+            Tables\Actions\DeleteAction::make(),
+        ])
+        ->bulkActions([
+            Tables\Actions\DeleteBulkAction::make(),
+        ]);
+}
+
+10. Jalankan Aplikasi
+php artisan serve
+
+
+Akses login user biasa di: http://127.0.0.1:8000/login
+
+Akses admin panel di: http://127.0.0.1:8000/admin
+
+Menu Products akan otomatis muncul di sidebar Filament, siap CRUD 🚀
+
+🔐 Tips Tambahan
+
+Kalau mau buat Seeder User Admin cepat:
+
+php artisan tinker
+
+User::create([
+    'name' => 'Admin',
+    'email' => 'admin@admin.com',
+    'password' => bcrypt('password'),
+]);
+
+
+Lalu login di /admin.
+
+Kalau mau Role & Permission, pakai package Spatie Laravel Permission
+
+
+
+http://127.0.0.1:8000/dashboard
+.
