@@ -38,13 +38,11 @@ class PenggunaForm
                 ->preload()
                 ->searchable()
                 ->required()
-                // saat form edit, isi otomatis role yang sudah dimiliki
                 ->afterStateHydrated(function ($component, $record) {
                     if ($record && method_exists($record, 'roles')) {
                         $component->state($record->roles->pluck('name')->toArray());
                     }
                 })
-                // pastikan state dikonversi jadi array biasa saat disimpan
                 ->dehydrateStateUsing(fn($state) => array_values((array) $state)),
         ]);
     }

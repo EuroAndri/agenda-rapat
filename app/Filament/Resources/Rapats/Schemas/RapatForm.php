@@ -25,7 +25,7 @@ class RapatForm
 
             Select::make('tempat_id')
                 ->label('Ruangan')
-                ->relationship('tempat', 'nama') // relasi otomatis ke model Tempat
+                ->relationship('tempat', 'nama') 
                 ->searchable()
                 ->preload()
                 ->required(),

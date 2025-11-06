@@ -44,10 +44,7 @@ class PenggunaResource extends Resource
         ];
     }
 
-    /**
-     * ✅ Pastikan field "roles" tidak menghilang dari data form
-     * Simpan sementara ke _roles agar tidak bentrok dengan kolom di tabel
-     */
+    
     public static function mutateFormDataBeforeCreate(array $data): array
     {
         $roles = $data['roles'] ?? [];
@@ -64,9 +61,6 @@ class PenggunaResource extends Resource
         return $data;
     }
 
-    /**
-     * ✅ Setelah berhasil disimpan, assign/sync role ke pengguna
-     */
     public static function afterCreate($record, array $data): void
     {
         if (!empty($data['_roles'])) {
@@ -81,9 +75,7 @@ class PenggunaResource extends Resource
         }
     }
 
-    /**
-     * 🛡️ Batasi resource ini hanya untuk admin
-     */
+    
     protected static function isAdmin(): bool
     {
         $user = filament()->auth()->user();

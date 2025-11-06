@@ -35,20 +35,16 @@ class Pengguna extends Authenticatable implements FilamentUser, HasName
         'email_verified_at' => 'datetime',
     ];
 
-    // 🔑 IZIN AKSES PANEL FILAMENT
     public function canAccessPanel(Panel $panel): bool
     {
-        // Hanya role tertentu yang bisa login ke dashboard
         return $this->hasRole(['admin', 'operator', 'pegawai']);
     }
 
-    // 🧾 NAMA YANG DITAMPILKAN DI FILAMENT
     public function getFilamentName(): string
     {
         return $this->nama ?? $this->email ?? 'Pengguna';
     }
 
-    // 🧩 RELASI
     public function kehadirans()
     {
         return $this->hasMany(Kehadiran::class, 'pengguna_id');
@@ -64,11 +60,9 @@ class Pengguna extends Authenticatable implements FilamentUser, HasName
         return $this->hasMany(Rapat::class, 'pengguna_id');
     }
 
-    // 🛠️ OTOMATIS SIMPAN ROLE DARI FORM FILAMENT (aman untuk login & seeder)
     protected static function booted()
     {
         static::saved(function ($pengguna) {
-            // Jalankan hanya saat menyimpan data lewat panel admin
             if (request()->is('admin/*') && request()->has('roles')) {
                 $roles = request()->input('roles');
                 $pengguna->syncRoles(is_array($roles) ? $roles : [$roles]);

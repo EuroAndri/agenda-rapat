@@ -11,10 +11,10 @@ class CreatePengguna extends CreateRecord
 
     protected function afterCreate(): void
     {
-        // Ambil data dari form
+        
         $data = $this->data;
 
-        // Sinkronisasi role jika ada
+        
         if (!empty($data['roles'])) {
             $this->record->syncRoles($data['roles']);
         }
