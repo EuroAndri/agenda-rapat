@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Penggunas\Pages;
+namespace App\Filament\Resources\Penggunas\PenggunaResource\Pages;
 
 use App\Filament\Resources\Penggunas\PenggunaResource;
 use Filament\Actions\DeleteAction;

@@ -20,7 +20,6 @@ class RapatResource extends Resource
 {
     protected static ?string $model = Rapat::class;
 
-   
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
     protected static ?string $navigationLabel = 'Rapat';
     protected static string|\UnitEnum|null $navigationGroup = 'Master Data';
@@ -28,25 +27,21 @@ class RapatResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'judul';
 
-    
     public static function form(Schema $schema): Schema
     {
         return RapatForm::configure($schema);
     }
 
-    
     public static function table(Table $table): Table
     {
         return RapatsTable::configure($table);
     }
 
-    
     public static function getRelations(): array
     {
         return [];
     }
 
-   
     public static function getPages(): array
     {
         return [
@@ -56,44 +51,37 @@ class RapatResource extends Resource
         ];
     }
 
-    
-    protected static function isAdmin(): bool
+    protected static function hasAccess(): bool
     {
         $user = filament()->auth()->user();
 
-        if (! $user instanceof \App\Models\Pengguna) {
-            return false;
-        }
-
-        if (! method_exists($user, 'hasRole')) {
-            return false;
-        }
-
-        return $user->hasRole('admin');
+        return $user instanceof Pengguna
+            && method_exists($user, 'hasRole')
+            && $user->hasRole(['admin', 'operator']);
     }
 
     public static function shouldRegisterNavigation(): bool
     {
-        return self::isAdmin();
+        return self::hasAccess();
     }
 
     public static function canViewAny(): bool
     {
-        return self::isAdmin();
+        return self::hasAccess();
     }
 
     public static function canCreate(): bool
     {
-        return self::isAdmin();
+        return self::hasAccess();
     }
 
     public static function canEdit(Model $record): bool
     {
-        return self::isAdmin();
+        return self::hasAccess();
     }
 
     public static function canDelete(Model $record): bool
     {
-        return self::isAdmin();
+        return self::hasAccess();
     }
 }
