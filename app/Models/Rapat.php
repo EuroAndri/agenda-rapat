@@ -45,4 +45,14 @@ class Rapat extends Model
     {
         return $this->hasMany(Bahan::class, 'rapat_id');
     }    
+
+   public function penggunas()
+    {
+        return $this->belongsToMany(\App\Models\Pengguna::class, 'rapat_pengguna', 'rapat_id', 'pengguna_id')
+            ->withPivot('status_kehadiran')
+            ->withTimestamps();
+    }
+
+
 }
+

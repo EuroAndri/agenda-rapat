@@ -15,8 +15,10 @@ class Pengguna extends Authenticatable implements FilamentUser, HasName
 {
     use HasFactory, HasUuids, HasRoles, Notifiable;
 
+    public string $guard_name = 'web';
+
     protected $table = 'pengguna';
-    protected $primaryKey = 'id';   
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'nama',
@@ -58,6 +60,13 @@ class Pengguna extends Authenticatable implements FilamentUser, HasName
     public function rapats()
     {
         return $this->hasMany(Rapat::class, 'pengguna_id');
+    }
+
+    public function rapats_diikuti()
+    {
+        return $this->belongsToMany(Rapat::class, 'rapat_pengguna', 'pengguna_id', 'rapat_id')
+            ->withPivot('status_kehadiran')
+            ->withTimestamps();
     }
 
     protected static function booted()

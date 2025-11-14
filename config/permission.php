@@ -201,4 +201,5 @@ return [
 
         'store' => 'default',
     ],
+    'uuid' => true,
 ];

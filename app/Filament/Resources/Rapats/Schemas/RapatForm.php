@@ -25,7 +25,7 @@ class RapatForm
 
             Select::make('tempat_id')
                 ->label('Ruangan')
-                ->relationship('tempat', 'nama') 
+                ->relationship('tempat', 'nama')
                 ->searchable()
                 ->preload()
                 ->required(),
@@ -37,6 +37,18 @@ class RapatForm
             DateTimePicker::make('waktu_selesai')
                 ->label('Waktu Selesai')
                 ->required(),
+
+            // 🟢 Field tambahan: hanya tampil untuk role "operator"
+            Select::make('penggunas')
+                ->label('Peserta Rapat')
+                ->multiple()
+                ->relationship('penggunas', 'nama')
+                ->searchable()
+                ->preload()
+                ->visible(function () {
+                    $user = \Filament\Facades\Filament::auth()->user();
+                    return $user instanceof \App\Models\Pengguna && $user->hasRole('operator');
+        }),
         ]);
     }
 }
