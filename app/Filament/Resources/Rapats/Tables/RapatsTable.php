@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Rapats\Tables;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\TagsColumn;
 use Filament\Actions\EditAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -15,6 +16,7 @@ class RapatsTable
     {
         return $table
             ->columns([
+
                 TextColumn::make('judul')
                     ->label('Judul')
                     ->searchable()
@@ -34,6 +36,11 @@ class RapatsTable
                     ->label('Selesai')
                     ->dateTime('d M Y H:i')
                     ->sortable(),
+
+                TagsColumn::make('penggunas.nama') // <-- KOLUM PEGAWAI
+                    ->label('Pegawai')
+                    ->limit(3) // opsional: tampilkan max 3 badge
+                    ->separator(', '),
 
                 TextColumn::make('deskripsi')
                     ->label('Deskripsi')

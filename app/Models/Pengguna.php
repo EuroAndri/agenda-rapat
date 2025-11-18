@@ -15,7 +15,7 @@ class Pengguna extends Authenticatable implements FilamentUser, HasName
 {
     use HasFactory, HasUuids, HasRoles, Notifiable;
 
-    public string $guard_name = 'web';
+    public $guard_name = 'web';
 
     protected $table = 'pengguna';
     protected $primaryKey = 'id';

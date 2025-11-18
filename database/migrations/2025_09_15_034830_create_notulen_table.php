@@ -8,17 +8,16 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('notulen', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->uuid('rapat_id');     
-            $table->uuid('pengguna_id');  
-            $table->text('isi')->nullable();      
-            $table->string('berkas')->nullable();
-            $table->timestamps();
+       Schema::create('notulens', function (Blueprint $table) {
+    $table->uuid('id')->primary();
+    $table->foreignUuid('rapat_id')->constrained('rapat')->onDelete('cascade');
+    $table->foreignUuid('pengguna_id')->constrained('pengguna')->onDelete('cascade');
 
-            $table->foreign('rapat_id')->references('id')->on('rapat')->onDelete('cascade');
-            $table->foreign('pengguna_id')->references('id')->on('pengguna')->onDelete('cascade');
-        });
+    $table->text('isi')->nullable();
+    $table->string('berkas')->nullable();
+
+    $table->timestamps();
+    });
     }
 
     public function down(): void
