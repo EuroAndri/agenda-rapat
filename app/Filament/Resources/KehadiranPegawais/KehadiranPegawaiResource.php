@@ -31,8 +31,7 @@ class KehadiranPegawaiResource extends Resource
                 $user = Auth::user();
 
                 if (! $user instanceof Pengguna) {
-                    $query->whereRaw('0 = 1');
-                    return;
+                    return $query->whereRaw('0 = 1');
                 }
 
                 if ($user->hasRole(['admin', 'operator'])) {
@@ -47,6 +46,7 @@ class KehadiranPegawaiResource extends Resource
                     $query->whereRaw('0 = 1');
                 }
             })
+
             ->columns([
                 TextColumn::make('judul')
                     ->label('Judul Rapat')
@@ -59,7 +59,8 @@ class KehadiranPegawaiResource extends Resource
                 TextColumn::make('waktu_selesai')
                     ->label('Selesai'),
 
-                SelectColumn::make('pivot.status_kehadiran')
+                
+                SelectColumn::make('status_kehadiran_fake')
                     ->label('Kehadiran')
                     ->options([
                         'hadir' => '✅ Hadir',
@@ -71,20 +72,27 @@ class KehadiranPegawaiResource extends Resource
                             ->where('pengguna_id', Auth::id())
                             ->first()?->pivot;
 
-                        return $pivot?->status_kehadiran;
+                        return $pivot?->status_kehadiran; 
                     })
                     ->updateStateUsing(function ($state, Model $record) {
+                        
                         $record->penggunas()
-                            ->updateExistingPivot(Auth::id(), ['status_kehadiran' => $state]);
+                            ->updateExistingPivot(Auth::id(), [
+                                'status_kehadiran' => $state,
+                            ]);
                     }),
             ])
+
             ->paginated(false);
     }
+
 
     public static function canCreate(): bool { return false; }
     public static function canEdit(Model $record): bool { return false; }
     public static function canDelete(Model $record): bool { return false; }
 
+
+    
     protected static function userHasRolePegawai(): bool
     {
         $user = Auth::user();

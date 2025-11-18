@@ -2,29 +2,30 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class KehadiranKonfirmasi extends Model
 {
-    use HasFactory, HasUuids;
+    protected $table = 'rapat_pengguna';
 
-    protected $table = 'kehadiran_konfirmasi';
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $guarded = [];
 
-    public function kehadiran()
+    public function getRouteKeyName(): string
     {
-        return $this->belongsTo(Kehadiran::class);
-    }
-
-    public function pengguna()
-    {
-        return $this->belongsTo(Pengguna::class);
+        return 'id'; 
     }
 
     public function rapat()
     {
-        return $this->belongsTo(Rapat::class);
+        return $this->belongsTo(Rapat::class, 'rapat_id');
+    }
+
+    public function pengguna()
+    {
+        return $this->belongsTo(Pengguna::class, 'pengguna_id');
     }
 }

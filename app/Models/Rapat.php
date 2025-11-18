@@ -4,12 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids; 
-
-use App\Models\Pengguna;
-use App\Models\Kehadiran;
-use App\Models\Notulen;
-use App\Models\Tempat;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Rapat extends Model
 {
@@ -17,25 +12,22 @@ class Rapat extends Model
 
     protected $table = 'rapat';
     protected $guarded = [];
-    
+
     public function pembuat()
     {
         return $this->belongsTo(Pengguna::class, 'pengguna_id');
     }
 
-    
     public function tempat()
     {
         return $this->belongsTo(Tempat::class, 'tempat_id');
     }
 
-    
     public function kehadirans()
     {
         return $this->hasMany(Kehadiran::class, 'rapat_id');
     }
 
-   
     public function notulen()
     {
         return $this->hasOne(Notulen::class, 'rapat_id');
@@ -44,15 +36,12 @@ class Rapat extends Model
     public function bahans()
     {
         return $this->hasMany(Bahan::class, 'rapat_id');
-    }    
+    }
 
-   public function penggunas()
+    public function pengguna()
     {
-        return $this->belongsToMany(\App\Models\Pengguna::class, 'rapat_pengguna', 'rapat_id', 'pengguna_id')
+        return $this->belongsToMany(Pengguna::class, 'rapat_pengguna', 'rapat_id', 'pengguna_id')
             ->withPivot('status_kehadiran')
             ->withTimestamps();
     }
-
-
 }
-
