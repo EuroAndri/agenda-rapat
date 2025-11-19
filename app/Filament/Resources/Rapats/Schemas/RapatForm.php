@@ -7,6 +7,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Facades\Filament;
+use App\Models\Rapat;
 
 class RapatForm
 {
@@ -38,7 +40,6 @@ class RapatForm
                 ->label('Waktu Selesai')
                 ->required(),
 
-            // 🟢 Field tambahan: hanya tampil untuk role "operator"
             Select::make('penggunas')
                 ->label('Peserta Rapat')
                 ->multiple()
@@ -46,9 +47,18 @@ class RapatForm
                 ->searchable()
                 ->preload()
                 ->visible(function () {
-                    $user = \Filament\Facades\Filament::auth()->user();
+                    $user = Filament::auth()->user();
                     return $user instanceof \App\Models\Pengguna && $user->hasRole('operator');
-        }),
+                }),
         ]);
+    }
+
+    public static function afterSave(Rapat $rapat, array $data)
+    {
+        if (isset($data['penggunas'])) {
+            foreach ($data['penggunas'] as $penggunaId) {
+                $rapat->attachPengguna($penggunaId);
+            }
+        }
     }
 }

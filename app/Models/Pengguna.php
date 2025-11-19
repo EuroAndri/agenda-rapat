@@ -69,6 +69,12 @@ class Pengguna extends Authenticatable implements FilamentUser, HasName
             ->withTimestamps();
     }
 
+    public function kehadiranKonfirmasi()
+    {
+    return $this->hasMany(KehadiranKonfirmasi::class, 'pengguna_id');
+    }
+
+
     protected static function booted()
     {
         static::saved(function ($pengguna) {

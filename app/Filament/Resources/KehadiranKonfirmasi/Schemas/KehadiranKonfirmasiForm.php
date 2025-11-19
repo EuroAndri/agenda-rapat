@@ -10,37 +10,26 @@ class KehadiranKonfirmasiForm
 {
     public static function configure(Schema $schema): Schema
     {
-        return $schema
-            ->components([
-                
-                Select::make('pengguna_id')
-                    ->label('Pegawai')
-                    ->relationship('pengguna', 'nama')
-                    ->searchable()
-                    ->disabled(),
+        return $schema->components([
+            Select::make('rapat_id')
+                ->label('Rapat')
+                ->relationship('rapat','judul')
+                ->disabled(),
 
-                Select::make('rapat_id')
-                    ->label('Rapat')
-                    ->relationship('rapat', 'judul')
-                    ->searchable()
-                    ->disabled(),
+            Select::make('pengguna_id')
+                ->label('Pegawai')
+                ->relationship('pengguna','nama')
+                ->disabled(),
 
-                Select::make('status')
-                    ->label('Status Kehadiran')
-                    ->options([
-                        'hadir' => 'Hadir',
-                        'tidak hadir' => 'Tidak Hadir',
-                        'izin' => 'Izin',
-                    ])
-                    ->required(),
+            Select::make('status')
+                ->label('Status Kehadiran')
+                ->options([
+                    'hadir' => 'Hadir',
+                    'tidak hadir' => 'Tidak Hadir',
+                    'izin' => 'Izin',
+                ]),
 
-                Textarea::make('catatan')
-                    ->label('Catatan (Opsional)')
-                    ->rows(3)
-                    ->columnSpanFull(),
-
-            ]);
+            Textarea::make('catatan')->label('Catatan'),
+        ]);
     }
 }
- 
-

@@ -2,27 +2,30 @@
 
 namespace App\Filament\Resources\KehadiranKonfirmasi;
 
-use App\Filament\Resources\KehadiranKonfirmasi\Pages\CreateKehadiranKonfirmasi;
-use App\Filament\Resources\KehadiranKonfirmasi\Pages\EditKehadiranKonfirmasi;
-use App\Filament\Resources\KehadiranKonfirmasi\Pages\ListKehadiranKonfirmasi;
+use App\Filament\Resources\KehadiranKonfirmasi\Pages;
+use App\Filament\Resources\KehadiranKonfirmasi\Tables\KehadiranKonfirmasiTable;
 use App\Filament\Resources\KehadiranKonfirmasi\Schemas\KehadiranKonfirmasiForm;
-use App\Filament\Resources\KehadiranKonfirmasi\Tables\KehadiranKonfirmasiTables;
+
 use App\Models\KehadiranKonfirmasi;
 use App\Models\Pengguna;
+
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Filament\Support\Icons\Heroicon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
+use BackedEnum;
 
 class KehadiranKonfirmasiResource extends Resource
 {
     protected static ?string $model = KehadiranKonfirmasi::class;
 
-    protected static ?string $slug = 'kehadiran-konfirmasi';
-
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
     protected static ?string $navigationLabel = 'Kehadiran Konfirmasi';
-    protected static ?int $navigationSort = 3;
     protected static string|\UnitEnum|null $navigationGroup = 'Master Data';
-    
+    protected static ?int $navigationSort = 3;
+
     public static function form(Schema $schema): Schema
     {
         return KehadiranKonfirmasiForm::configure($schema);
@@ -30,56 +33,46 @@ class KehadiranKonfirmasiResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return KehadiranKonfirmasiTables::configure($table);
+        return KehadiranKonfirmasiTable::configure($table);
     }
 
-    public static function getRelations(): array
+    protected static function adminOnly(): bool
     {
-        return [];
+        $user = Auth::user();
+        return $user instanceof Pengguna
+            && $user->hasRole(['admin','operator']);
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return self::adminOnly();
+    }
+
+    public static function canViewAny(): bool
+    {
+        return self::adminOnly();
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return self::adminOnly();
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return false;
     }
 
     public static function getPages(): array
     {
         return [
-            'index'  => ListKehadiranKonfirmasi::route('/'),
-            'create' => CreateKehadiranKonfirmasi::route('/create'),
-            'edit'   => EditKehadiranKonfirmasi::route('/{record}/edit'),
+            'index' => Pages\ListKehadiranKonfirmasi::route('/'),
+            'edit'  => Pages\EditKehadiranKonfirmasi::route('/{record}/edit'),
         ];
-    }
-
-    protected static function hasAccess(): bool
-    {
-        $user = filament()->auth()->user();
-
-        if (!($user instanceof Pengguna)) {
-            return false;
-        }
-
-        return $user->hasRole(['admin', 'operator']);
-    }
-
-    public static function shouldRegisterNavigation(): bool
-    {
-        return self::hasAccess();
-    }
-
-    public static function canViewAny(): bool
-    {
-        return self::hasAccess();
-    }
-
-    public static function canCreate(): bool
-    {
-        return self::hasAccess();
-    }
-
-    public static function canEdit($record): bool
-    {
-        return self::hasAccess();
-    }
-
-    public static function canDelete($record): bool
-    {
-        return self::hasAccess();
     }
 }

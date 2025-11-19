@@ -3,21 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class KehadiranKonfirmasi extends Model
 {
-    protected $table = 'rapat_pengguna';
+    use HasFactory, HasUuids;
 
-    protected $primaryKey = 'id';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    protected $table = 'kehadiran_konfirmasi';
 
-    protected $guarded = [];
-
-    public function getRouteKeyName(): string
-    {
-        return 'id'; 
-    }
+    protected $fillable = [
+        'rapat_id',
+        'pengguna_id',
+        'status',
+        'catatan',
+    ];
 
     public function rapat()
     {
