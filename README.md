@@ -33,8 +33,8 @@ Aplikasi ini digunakan untuk mengelola rapat, notulen, kehadiran pegawai, dan do
 
 ## 🛠️ Teknologi yang Digunakan
 
-- Laravel 10
-- FilamentPHP v3
+- Laravel 12
+- FilamentPHP v4
 - MySQL / MariaDB
 - PHP 8.2+
 
