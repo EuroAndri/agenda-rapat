@@ -16,7 +16,6 @@ class EditNotulen extends EditRecord
             DeleteAction::make()
                 ->requiresConfirmation()
                 ->action(function () {
-                    // Langsung akses record saat ini
                     $this->record->delete();
 
                     $this->notify('success', 'Notulen berhasil dihapus.');

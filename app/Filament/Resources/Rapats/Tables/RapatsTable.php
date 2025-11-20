@@ -37,9 +37,9 @@ class RapatsTable
                     ->dateTime('d M Y H:i')
                     ->sortable(),
 
-                TagsColumn::make('penggunas.nama') // <-- KOLUM PEGAWAI
+                TagsColumn::make('penggunas.nama') 
                     ->label('Pegawai')
-                    ->limit(3) // opsional: tampilkan max 3 badge
+                    ->limit(3) 
                     ->separator(', '),
 
                 TextColumn::make('deskripsi')

@@ -39,7 +39,7 @@ class NotulensTable
             ->recordActions([
                 EditAction::make(),
 
-                // Tombol download PDF langsung
+                
                 Action::make('download')
                     ->label('Download PDF')
                     ->icon('heroicon-o-arrow-down')
@@ -51,7 +51,6 @@ class NotulensTable
                             }
                         }
 
-                        // File tidak ada → redirect back dengan flash
                         session()->flash('danger', 'File not found!');
                         return redirect()->back();
                     })

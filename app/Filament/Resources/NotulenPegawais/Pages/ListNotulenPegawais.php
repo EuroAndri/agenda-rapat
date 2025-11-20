@@ -9,9 +9,8 @@ class ListNotulenPegawais extends ListRecords
 {
     protected static string $resource = NotulenPegawaiResource::class;
 
-    // 🔥 Hilangkan tombol "New notulen"
     protected function getHeaderActions(): array
     {
-        return []; // kosong → tidak ada tombol create
+        return []; 
     }
 }

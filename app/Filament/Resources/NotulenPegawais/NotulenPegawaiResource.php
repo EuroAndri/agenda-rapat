@@ -24,9 +24,7 @@ class NotulenPegawaiResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'isi';
 
-    // ==================================================
-    // 🔐 BATAS AKSES HANYA UNTUK ROLE "pegawai"
-    // ==================================================
+    
     protected static function hasAccess(): bool
     {
         $user = filament()->auth()->user();
@@ -48,22 +46,20 @@ class NotulenPegawaiResource extends Resource
 
     public static function canCreate(): bool
     {
-        return false; // pegawai tidak membuat notulen
+        return false;
     }
 
     public static function canEdit($record): bool
     {
-        return false; // pegawai tidak mengedit
+        return false; 
     }
 
     public static function canDelete($record): bool
     {
-        return false; // pegawai tidak menghapus
+        return false; 
     }
 
-    // ==================================================
-    // 🔎 FILTERING: Pegawai hanya melihat rapat yg diundang
-    // ==================================================
+    
     public static function getEloquentQuery(): \Illuminate\Database\Eloquent\Builder
     {
         $user = filament()->auth()->user();
@@ -74,17 +70,13 @@ class NotulenPegawaiResource extends Resource
             });
     }
 
-    // ==================================================
-    // FORM (Read-Only)
-    // ==================================================
+    
     public static function form(Schema $schema): Schema
     {
         return NotulenPegawaiForm::configure($schema);
     }
 
-    // ==================================================
-    // TABLE
-    // ==================================================
+    
     public static function table(Table $table): Table
     {
         return NotulenPegawaisTable::configure($table);

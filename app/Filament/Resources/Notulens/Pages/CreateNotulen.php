@@ -11,7 +11,6 @@ class CreateNotulen extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        // Mengisi kolom pengguna_id dengan pengguna Filament yang sedang login
         $data['pengguna_id'] = filament()->auth()->user()?->id;
 
         return $data;

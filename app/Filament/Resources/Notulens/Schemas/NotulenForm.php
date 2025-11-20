@@ -12,18 +12,16 @@ class NotulenForm
         return $schema->components([
             FileUpload::make('berkas')
                 ->label('File Notulen (PDF)')
-                ->directory('notulen')   // folder di storage/app/public/notulen
-                ->disk('public')          // pakai disk public
+                ->directory('notulen')   
+                ->disk('public')         
                 ->acceptedFileTypes(['application/pdf'])
-                ->maxSize(5120)           // max 5 MB
+                ->maxSize(5120)           
                 ->required(),
 
-            // bisa tambahkan Textarea untuk isi notulen
             \Filament\Forms\Components\Textarea::make('isi')
                 ->label('Isi Notulen')
                 ->required(),
 
-            // Pilihan rapat
             \Filament\Forms\Components\Select::make('rapat_id')
                 ->label('Rapat')
                 ->relationship('rapat', 'judul')

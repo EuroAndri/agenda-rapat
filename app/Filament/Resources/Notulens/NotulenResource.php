@@ -51,9 +51,7 @@ class NotulenResource extends Resource
         ];
     }
 
-    // ============================
-    // 🔐 Akses Berdasarkan Role
-    // ============================
+    
     protected static function hasAccess(): bool
     {
         $user = filament()->auth()->user();
@@ -94,9 +92,6 @@ class NotulenResource extends Resource
         return self::hasAccess();
     }
 
-    // ============================
-    // 🔹 Auto-assign pengguna_id saat create
-    // ============================
     protected static function mutateFormDataBeforeCreate(array $data): array
     {
         $data['pengguna_id'] = filament()->auth()->user()->id;
