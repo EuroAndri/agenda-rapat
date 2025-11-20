@@ -19,9 +19,15 @@ Aplikasi ini digunakan untuk mengelola rapat, notulen, kehadiran pegawai, dan do
 🚀 Cara Menjalankan Project
 
 git clone https://github.com/EuroAndri/agenda-rapat.git
+
 cd agenda-rapat
+
 composer install
+
 cp .env.example .env
+
 php artisan key:generate
+
 mysql -u root -p agenda_rapat < database/agendarapat.sql
+
 php artisan serve
