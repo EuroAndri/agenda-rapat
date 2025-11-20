@@ -15,8 +15,11 @@ class NotulenForm
                 ->directory('notulen')   
                 ->disk('public')         
                 ->acceptedFileTypes(['application/pdf'])
+                ->preserveFilenames()
+                ->visibility('public')
                 ->maxSize(5120)           
-                ->required(),
+                ->required()
+                ->multiple(false),
 
             \Filament\Forms\Components\Textarea::make('isi')
                 ->label('Isi Notulen')

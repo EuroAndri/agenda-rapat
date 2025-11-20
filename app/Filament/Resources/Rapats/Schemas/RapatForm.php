@@ -48,7 +48,7 @@ class RapatForm
                 ->preload()
                 ->visible(function () {
                     $user = Filament::auth()->user();
-                    return $user instanceof \App\Models\Pengguna && $user->hasRole('operator');
+                    return $user instanceof \App\Models\Pengguna && $user->hasRole(['operator','admin']);
                 }),
         ]);
     }

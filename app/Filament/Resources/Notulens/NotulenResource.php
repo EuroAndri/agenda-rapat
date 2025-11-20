@@ -25,7 +25,7 @@ class NotulenResource extends Resource
     protected static string|\UnitEnum|null $navigationGroup = 'Master Data';
     protected static ?int $navigationSort = 3;
 
-    protected static ?string $recordTitleAttribute = 'isi'; // sesuai DB
+    protected static ?string $recordTitleAttribute = 'isi';
 
     public static function form(Schema $schema): Schema
     {
@@ -51,7 +51,6 @@ class NotulenResource extends Resource
         ];
     }
 
-    
     protected static function hasAccess(): bool
     {
         $user = filament()->auth()->user();
@@ -95,6 +94,15 @@ class NotulenResource extends Resource
     protected static function mutateFormDataBeforeCreate(array $data): array
     {
         $data['pengguna_id'] = filament()->auth()->user()->id;
+        return $data;
+    }
+
+    protected static function mutateFormDataBeforeUpdate(array $data): array
+    {
+        if (empty($data['berkas'])) {
+            unset($data['berkas']);
+        }
+
         return $data;
     }
 }
