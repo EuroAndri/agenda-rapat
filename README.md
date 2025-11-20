@@ -17,6 +17,7 @@ Aplikasi ini digunakan untuk mengelola rapat, notulen, kehadiran pegawai, dan do
 - PHP 8.2+
 
 🚀 Cara Menjalankan Project
+
 git clone https://github.com/EuroAndri/agenda-rapat.git
 cd agenda-rapat
 composer install
