@@ -106,7 +106,7 @@ class KehadiranPegawaiResource extends Resource
     {
         $user = Auth::user();
         return $user instanceof Pengguna
-            && $user->hasRole('pegawai');
+            && $user->hasRole(['pegawai', 'admin', 'operator']);
     }
 
     public static function shouldRegisterNavigation(): bool
