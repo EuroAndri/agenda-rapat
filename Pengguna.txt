@@ -1,0 +1,47 @@
+Admin 
+email: andri123@gmail.com
+password: 1
+
+Operator
+email: surya@gmail.com
+password: 5
+
+Pegawai
+email: ozora.gamtenk@gmail.com
+password: 11
+
+
+muhammad1@gmail.com
+12
+=================================================================
+
+pegawai
+email addres : endra.iswahyudi@gmail.com
+pw : 123456
+
+admin
+email addres : onurdiyanti@gmail.com
+pw : 0
+
+operator 
+email addres : marbun.karen@gmail.com
+pw : 3
+
+=================================================================
+
+SELECT 
+    r.name AS role,
+    p.id AS pengguna_id,
+    p.nama,
+    p.email
+FROM model_has_roles mhr
+JOIN roles r ON r.id = mhr.role_id
+JOIN pengguna p ON p.id = mhr.model_id
+ORDER BY r.name;
+
+
+
+
+
+
+
