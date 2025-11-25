@@ -36,7 +36,7 @@ class NotulenPegawaiResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return self::hasAccess();
+        return false;
     }
 
     public static function canViewAny(): bool

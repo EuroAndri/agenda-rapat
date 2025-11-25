@@ -24,4 +24,11 @@ class Notulen extends Model
     {
         return $this->belongsTo(Pengguna::class, 'pengguna_id');
     }
+
+    public function rapatPegawai()
+    {
+    return $this->belongsTo(\App\Models\RapatPegawai::class, 'rapat_id');
+    }
+
 }
+

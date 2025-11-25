@@ -61,4 +61,8 @@ public function attachPengguna($penggunaId, $status = null)
     return $this->hasMany(KehadiranKonfirmasi::class, 'rapat_id');
     }
 
+    public function notulens()
+    {
+    return $this->hasMany(Notulen::class);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Rapats;
 
+use App\Filament\Resources\Rapats\RelationManagers\NotulenRelation;
 use App\Filament\Resources\Rapats\Pages\CreateRapat;
 use App\Filament\Resources\Rapats\Pages\EditRapat;
 use App\Filament\Resources\Rapats\Pages\ListRapats;
@@ -37,10 +38,14 @@ class RapatResource extends Resource
         return RapatsTable::configure($table);
     }
 
-    public static function getRelations(): array
+   public static function getRelations(): array
     {
-        return [];
+    return [
+        RelationManagers\KehadiranRelation::class,
+        NotulenRelation::class,
+    ];
     }
+
 
     public static function getPages(): array
     {
@@ -84,4 +89,7 @@ class RapatResource extends Resource
     {
         return self::hasAccess();
     }
+
+    
+
 }

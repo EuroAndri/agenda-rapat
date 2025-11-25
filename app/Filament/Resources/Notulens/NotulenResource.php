@@ -68,7 +68,7 @@ class NotulenResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return self::hasAccess();
+        return false;
     }
 
     public static function canViewAny(): bool
@@ -105,4 +105,5 @@ class NotulenResource extends Resource
 
         return $data;
     }
+
 }

@@ -45,7 +45,7 @@ class KehadiranKonfirmasiResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return self::adminOnly();
+         return false;
     }
 
     public static function canViewAny(): bool

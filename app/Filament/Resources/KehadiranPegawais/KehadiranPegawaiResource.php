@@ -111,7 +111,7 @@ class KehadiranPegawaiResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return self::userHasRolePegawai();
+        return false;
     }
 
     public static function canViewAny(): bool
