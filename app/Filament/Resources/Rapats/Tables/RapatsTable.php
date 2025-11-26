@@ -49,13 +49,6 @@ class RapatsTable
 
             ->actions([
 
-Action::make('peserta')
-        ->label('Peserta')
-        ->icon('heroicon-o-users')
-        ->color('info')
-        ->url(fn ($record) => route('filament.admin.resources.rapats.edit', $record) . '#peserta')
-        ->openUrlInNewTab(false),
-
     Action::make('kehadiran')
         ->label('Kehadiran')
         ->icon('heroicon-o-check-circle')

@@ -64,8 +64,6 @@ class RapatPegawaiResource extends Resource
     {
         return [
             'index' => ListRapatPegawais::route('/'),
-            'create' => CreateRapatPegawai::route('/create'),
-            'edit' => EditRapatPegawai::route('/{record}/edit'),
         ];
     }
 }
