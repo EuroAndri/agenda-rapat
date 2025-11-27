@@ -3,65 +3,35 @@
         Kalender Bulan {{ now()->translatedFormat('F Y') }}
     </h2>
 
-    @php
-        $today = now()->copy()->startOfDay();
-        $startOfMonth = now()->startOfMonth();
-        $endOfMonth = now()->endOfMonth();
-        $daysInMonth = $endOfMonth->day;
-        $firstDayOfWeek = $startOfMonth->dayOfWeek;
-        $weeks = ceil(($daysInMonth + $firstDayOfWeek) / 7);
-    @endphp
+    <div id="calendar"></div>
 
-    <table class="w-full text-center border border-gray-400 border-collapse border-spacing-0">
-        <thead class="bg-gray-100">
-            <tr>
-                <th class="border border-gray-400 p-2">Minggu</th>
-                <th class="border border-gray-400 p-2">Senin</th>
-                <th class="border border-gray-400 p-2">Selasa</th>
-                <th class="border border-gray-400 p-2">Rabu</th>
-                <th class="border border-gray-400 p-2">Kamis</th>
-                <th class="border border-gray-400 p-2">Jumat</th>
-                <th class="border border-gray-400 p-2">Sabtu</th>
-            </tr>
-        </thead>
+    @push('styles')
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- FullCalendar CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+    @endpush
 
-        <tbody>
-        @for ($week = 0; $week < $weeks; $week++)
-            <tr>
-                @for ($dow = 0; $dow < 7; $dow++)
-                    @php
-                        $cellDay = $week * 7 + $dow - $firstDayOfWeek + 1;
-                        $date = $cellDay > 0 && $cellDay <= $daysInMonth
-                            ? $startOfMonth->copy()->addDays($cellDay - 1)
-                            : null;
-                    @endphp
+    @push('scripts')
+        <!-- FullCalendar JS -->
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var calendarEl = document.getElementById('calendar');
 
-                    <td class="border border-gray-400 h-16 w-16 p-0 flex items-center justify-center">
-                        @if ($date)
-                            <div class="flex items-center justify-center w-12 h-12
-                                @if ($date->isSameDay($today))
-                                    bg-blue-500 text-white font-bold rounded-full
-                                @endif
-                            ">
-                                {{ $cellDay }}
-                            </div>
-                        @else
-                            <div class="w-12 h-12"></div>
-                        @endif
-                    </td>
-                @endfor
-            </tr>
-        @endfor
-        </tbody>
-    </table>
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: 'dayGridMonth',
+                    themeSystem: 'bootstrap5',
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                    },
+                    events: @json($events ?? [])
+                });
 
-    <div class="mt-4 text-center">
-        @if(session()->has('google_token'))
-            <p class="text-green-600 font-semibold">✅ Anda sudah login Google Calendar</p>
-        @else
-            <a href="{{ route('google.redirect') }}" class="btn btn-primary">
-                Hubungkan Google Calendar
-            </a>
-        @endif
-    </div>
+                calendar.render();
+            });
+        </script>
+    @endpush
 </x-filament::page>

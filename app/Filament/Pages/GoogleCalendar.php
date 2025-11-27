@@ -9,10 +9,7 @@ use Google_Service_Calendar;
 
 class GoogleCalendar extends Page
 {
-    // ✅ tipe property sesuai parent class
     protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-calendar';
-    // atau bisa pakai enum: protected static Icon|string|null $navigationIcon = Icon::Calendar;
-
     protected string $view = 'filament.pages.google-calendar';
     protected static ?string $navigationLabel = 'Google Calendar';
     protected static ?string $title = 'Google Calendar';
@@ -44,12 +41,28 @@ class GoogleCalendar extends Page
         $calendarId = env('GOOGLE_CALENDAR_ID', 'primary');
 
         $events = $service->events->listEvents($calendarId, [
-            'maxResults' => 10,
+            'maxResults' => 50,
             'singleEvents' => true,
             'orderBy' => 'startTime',
-            'timeMin' => now()->startOfDay()->toRfc3339String(),
+            'timeMin' => now()->startOfMonth()->toRfc3339String(),
+            'timeMax' => now()->endOfMonth()->toRfc3339String(),
         ]);
 
-        $this->events = $events->getItems();
+        $items = [];
+        foreach ($events->getItems() as $event) {
+            $start = $event->getStart()->getDateTime() ?: $event->getStart()->getDate();
+            $end   = $event->getEnd()->getDateTime() ?: $event->getEnd()->getDate();
+
+            $items[] = [
+                'title' => $event->getSummary(),
+                'start' => $start,
+                'end'   => $end,
+            ];
+        }
+
+        // kalau tidak ada event, tetap isi dummy tanggal 1–akhir bulan
+        
+
+        $this->events = $items;
     }
 }

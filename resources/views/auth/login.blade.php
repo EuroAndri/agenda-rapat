@@ -11,6 +11,7 @@
         input[type="email"], input[type="password"] { width: 100%; padding: 10px; margin-bottom: 16px; border: 1px solid #ccc; border-radius: 4px;}
         button { width: 100%; padding: 10px; background: #007bff; color: #fff; border: none; border-radius: 4px; font-size: 16px;}
         .error { color: red; margin-bottom: 16px; }
+        .google-btn { margin-top: 16px; background: #db4437; }
     </style>
 </head>
 <body>
@@ -25,6 +26,13 @@
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
+
+        <hr>
+
+        <!-- Tombol register dengan Google -->
+        <a href="{{ route('google.login') }}">
+            <button type="button" class="google-btn">Register dengan Google</button>
+        </a>
     </div>
 </body>
 </html>

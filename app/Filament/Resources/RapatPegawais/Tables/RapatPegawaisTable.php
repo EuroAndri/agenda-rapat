@@ -7,7 +7,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\SelectColumn;
 use Filament\Actions\Action;
 use App\Models\KehadiranKonfirmasi;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class RapatPegawaisTable
@@ -62,15 +61,15 @@ class RapatPegawaisTable
                             return;
                         }
 
-                        // ambil berkas pertama sebagai contoh
+                        // ambil berkas pertama
                         $file = $notulens->first()->berkas;
 
-                        if (!$file || !Storage::disk('public')->exists('notulen/' . $file)) {
+                        if (!$file || !Storage::disk('public')->exists($file)) {
                             session()->flash('danger', 'File not found');
                             return;
                         }
 
-                        return response()->download(Storage::disk('public')->path('notulen/' . $file));
+                        return response()->download(Storage::disk('public')->path($file));
                     }),
             ])
             ->filters([])
