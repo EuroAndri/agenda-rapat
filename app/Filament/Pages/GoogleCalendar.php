@@ -6,25 +6,29 @@ use Filament\Pages\Page;
 use Filament\Support\Enums\Icon;
 use Google_Client;
 use Google_Service_Calendar;
+use BackedEnum;
 
 class GoogleCalendar extends Page
 {
-    protected static \BackedEnum|string|null $navigationIcon = 'heroicon-o-calendar';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-calendar';
     protected string $view = 'filament.pages.google-calendar';
     protected static ?string $navigationLabel = 'Google Calendar';
     protected static ?string $title = 'Google Calendar';
 
     public array $events = [];
+    public bool $isLoggedIn = false;
 
     public static function canAccess(): bool
     {
-        return true; // semua role bisa akses
+        return true;
     }
 
     public function mount(): void
     {
         $token = session('google_token');
+
         if (!$token) {
+            $this->isLoggedIn = false;
             $this->events = [];
             return;
         }
@@ -36,6 +40,8 @@ class GoogleCalendar extends Page
             $client->fetchAccessTokenWithRefreshToken($token['refresh_token']);
             session(['google_token' => $client->getAccessToken()]);
         }
+
+        $this->isLoggedIn = true;
 
         $service = new Google_Service_Calendar($client);
         $calendarId = env('GOOGLE_CALENDAR_ID', 'primary');
@@ -59,9 +65,6 @@ class GoogleCalendar extends Page
                 'end'   => $end,
             ];
         }
-
-        // kalau tidak ada event, tetap isi dummy tanggal 1–akhir bulan
-        
 
         $this->events = $items;
     }

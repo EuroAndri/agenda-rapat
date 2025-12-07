@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Google_Client;
-use App\Models\User;
+use App\Models\Pengguna; // gunakan model Pengguna sesuai migration
 use Illuminate\Support\Facades\Auth;
 
 class GoogleLoginController extends Controller
@@ -50,38 +50,19 @@ class GoogleLoginController extends Controller
         }
 
         // cek apakah user sudah ada
-        $user = User::where('email', $googleUser['email'])->first();
+        $user = Pengguna::where('email', $googleUser['email'])->first();
 
         if (!$user) {
-            // buat user baru tanpa role
-            $user = User::create([
-                'name' => $googleUser['name'],
+            // buat user baru langsung dengan role pegawai
+            $user = Pengguna::create([
+                'nama' => $googleUser['name'],
                 'email' => $googleUser['email'],
                 'google_id' => $googleUser['sub'],
-                'password' => bcrypt(str()->random(16)),
+                'google_avatar' => $googleUser['picture'] ?? null,
+                'role' => 'pegawai', // otomatis pegawai
+                'password' => bcrypt(str()->random(16)), // password random
             ]);
-
-            // redirect ke halaman pilih role
-            return redirect()->route('register.chooseRole', ['user' => $user->id]);
         }
-
-        Auth::login($user);
-        return redirect()->intended('/dashboard');
-    }
-
-    public function chooseRole(User $user)
-    {
-        return view('auth.choose-role', compact('user'));
-    }
-
-    public function setRole(Request $request, User $user)
-    {
-        $request->validate([
-            'role' => 'required|in:admin,operator,pegawai',
-        ]);
-
-        $user->role = $request->role;
-        $user->save();
 
         Auth::login($user);
         return redirect()->intended('/dashboard');

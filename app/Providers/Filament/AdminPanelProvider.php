@@ -28,7 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->authGuard('web') 
+            ->authGuard('web')
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -54,8 +54,8 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
+                \App\Http\Middleware\ValidatePasswordLength::class, // middleware custom
                 Authenticate::class,
             ]);
-            
     }
 }
